@@ -20,7 +20,7 @@ const EventsPage = () => {
     enabled: !!address, // Only run when address is available
   });
   console.log(isCheckingRegistration)
-  
+
   // Contract write hook for register function
   const { write: registerUser, data: hash, isLoading: isWriteLoading, error: writeError } = useContractWrite({
     address: CONTRACT_ADDRESS,
@@ -251,7 +251,7 @@ const EventsPage = () => {
 
                   {/* Action */}
                   <div className="mt-auto">
-                    {event.isActive ? (
+                    {/* {event.isActive ? (
                       <button
                         onClick={() => handleJoinNow()}
                         className="w-full py-3 rounded-sm pixel-button"
@@ -273,7 +273,32 @@ const EventsPage = () => {
                       >
                         {event.prize} Coming Soon
                       </div>
-                    )}
+                    )} */}
+                    <div className="flex justify-center items-center w-full">
+  {event.isActive ? (
+    <button
+      onClick={() => handleJoinNow()}
+      className="w-full py-3 rounded-sm pixel-button align-center"
+      style={{
+        fontFamily: "'Press Start 2P', ui-monospace, monospace",
+      }}
+    >
+      Enter
+    </button>
+  ) : (
+    <div
+      className="w-full py-3 text-center rounded-sm"
+      style={{
+        fontFamily: "Press Start 2P', ui-monospace, monospace",
+        color: "#9ddfd0",
+        background: "linear-gradient(180deg, rgba(18,255,215,0.08), rgba(18,255,215,0.04))",
+        boxShadow: "inset 0 0 0 2px rgba(18,255,215,0.15)",
+      }}
+    >
+      {event.prize} Coming Soon
+    </div>
+  )}
+</div>
                     <div className="mt-2 text-center text-xs" style={{ color: "#9ddfd0" }}>
                       Pool Entry Fee : $ {event.fee}
                     </div>
