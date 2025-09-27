@@ -1,25 +1,23 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import { useAccount, useDisconnect } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const LandingPage = ({ setAuthToken, authToken, handleLogout }) => {
   console.log("LoginPage component rendered: ", authToken);
   const navigate = useNavigate();
   const { address, isConnected } = useAccount();
-  const { connect, connectors } = useConnect();
   const { disconnect } = useDisconnect();
 
-  const handleWalletConnect = async () => {
+  // Wrap handleWalletConnect in useCallback to avoid changing reference on every render
+  const handleWalletConnect = React.useCallback(async () => {
     if (isConnected && address) {
-      // Set the wallet address as auth token for now
       setAuthToken(address);
       localStorage.setItem("authToken", address);
       localStorage.setItem("address", address);
-      console.log("Wallet connected:", address);
       navigate("/events");
     }
-  };
+  }, [isConnected, address, setAuthToken, navigate]);
 
   const onLogoutClick = () => {
     disconnect();
@@ -32,7 +30,7 @@ const LandingPage = ({ setAuthToken, authToken, handleLogout }) => {
     if (isConnected && address) {
       handleWalletConnect();
     }
-  }, [isConnected, address]);
+  }, [isConnected, address, handleWalletConnect]);
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-gradient-to-b from-black to-gray-900">

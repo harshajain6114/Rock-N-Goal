@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { Coins, ShieldPlus, RefreshCw } from "lucide-react";
+import { Coins, ShieldPlus } from "lucide-react";
 import mapboxgl from "mapbox-gl";
 import carddata from "../data/cards";
 import GameLoader from "./GameLoader";
-import { useAccount, useBalance, useContractRead, useContractWrite, useWaitForTransaction } from 'wagmi';
+import { useAccount, useContractRead, useContractWrite, useWaitForTransaction } from 'wagmi';
 import { CONTRACT_ADDRESS, CONTRACT_ABI } from '../contract';
 import { Leaf, Target } from "lucide-react";
 
@@ -29,6 +29,7 @@ const DashboardPage = () => {
   const [data, setData] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log(bank, error, activeSection, data)
   // Contract read hooks for player stats
   const { data: playerCurrency, refetch: refetchCurrency } = useContractRead({
     address: CONTRACT_ADDRESS,
@@ -53,6 +54,8 @@ const DashboardPage = () => {
     args: address ? [address] : undefined,
     enabled: !!address,
   });
+
+  console.log(playerCards)
 
   // Contract read hook to get VRF fee
   const { data: vrfFee } = useContractRead({
@@ -99,7 +102,7 @@ const DashboardPage = () => {
   }, [address]);
 
   // Function to refresh all contract data
-  const refreshContractData = async () => {
+  const refreshContractData = useCallback(async () => {
     try {
       await Promise.all([
         refetchCurrency(),
@@ -110,7 +113,8 @@ const DashboardPage = () => {
       console.error("Error refreshing contract data:", error);
       setError("Failed to refresh contract data");
     }
-  };
+  }, [refetchCurrency, refetchPosition, refetchCards]);
+
 
   useEffect(() => {
     fetchWallets();
@@ -175,6 +179,15 @@ const DashboardPage = () => {
     }
   };
 
+    const rollDiceAndMove = useCallback(() => {
+    if (rolling) return;
+    setRolling(true);
+
+    setTimeout(() => {
+      setRolling(false);
+    }, 2000);
+  }, [rolling]);
+
   // Handle successful move transaction
   useEffect(() => {
     if (isMoveSuccess) {
@@ -192,7 +205,7 @@ const DashboardPage = () => {
       setShowMintCard(false);
       setShowCardDetails(true);
     }
-  }, [isMoveSuccess]);
+  }, [isMoveSuccess, refreshContractData, rollDiceAndMove]);
 
   // Log transaction hash when available
   useEffect(() => {
@@ -230,17 +243,6 @@ const DashboardPage = () => {
   }, [transactionError]);
 
   const monopolyLocations = carddata.cards;
-
-  const rollDiceAndMove = () => {
-    if (rolling) return;
-    setRolling(true);
-
-    // Get the new position from the contract (this will be updated by the success handler)
-    // For now, just simulate a simple move animation
-    setTimeout(() => {
-      setRolling(false);
-    }, 2000); // 2 second animation
-  };
 
   useEffect(() => {
     mapboxgl.accessToken =
@@ -310,7 +312,7 @@ const DashboardPage = () => {
         mapRef.current.remove();
       }
     };
-  }, []);
+  }, [monopolyLocations, navigate, playerLocation]);
 
   useEffect(() => {
     if (playerMarkerRef.current) {
@@ -320,7 +322,7 @@ const DashboardPage = () => {
         playerMarkerRef.current.setLngLat(coordinates);
       }
     }
-  }, [playerLocation]);
+  }, [playerLocation, monopolyLocations]);
 
   const createCustomMarkerElement = (placeType) => {
     const markerElement = document.createElement("div");

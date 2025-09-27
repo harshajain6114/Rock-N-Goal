@@ -19,7 +19,8 @@ const EventsPage = () => {
     args: address ? [address] : undefined,
     enabled: !!address, // Only run when address is available
   });
-
+  console.log(isCheckingRegistration)
+  
   // Contract write hook for register function
   const { write: registerUser, data: hash, isLoading: isWriteLoading, error: writeError } = useContractWrite({
     address: CONTRACT_ADDRESS,
@@ -56,6 +57,7 @@ const EventsPage = () => {
         );
 
   const handleJoinNow = async () => {
+    setActiveFilter("all")
     try {
       if (!address) {
         throw new Error("No wallet connected");
