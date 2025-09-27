@@ -33,8 +33,9 @@ const LandingPage = ({ setAuthToken, authToken, handleLogout }) => {
           gender: true,
         },
       }).build();
-
+      console.log("Details", app)
       setSelfApp(app);
+
     }
   }, [address]);
 
