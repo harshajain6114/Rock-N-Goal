@@ -5,7 +5,7 @@ const carddata = {
       type: "GO",
       name: "GO - Delhi Central",
       description: "Start your journey in the heart of Delhi. Collect 200 points when you pass here!",
-      image: "/images/punctuation.jpg",
+      image: "/images/delhicentral.webp",
       rent: 0,
       coordinates: [77.2090, 28.6139], // Delhi center
     },
@@ -14,7 +14,7 @@ const carddata = {
       type: "Property Card",
       name: "Connaught Place",
       description: "Delhi's premier commercial hub. Own this prime location!",
-      image: "/images/hotelMarriot.jpg",
+      image: "/images/connaught.jpg",
       rent: 10,
       coordinates: [77.2050, 28.6149], // Close to center
     },
@@ -23,7 +23,7 @@ const carddata = {
       type: "Community Chest",
       name: "Delhi Metro",
       description: "Public transport system. Draw a community chest card.",
-      image: "/images/traffic.jpg",
+      image: "/images/delhi metro.webp",
       rent: 0,
       coordinates: [77.2070, 28.6129], // Close to center
     },
@@ -32,7 +32,7 @@ const carddata = {
       type: "Property Card",
       name: "Chandni Chowk",
       description: "Historic market area. A bustling commercial property.",
-      image: "/images/rameshwaram.jpg",
+      image: "/images/chandni chowk.webp",
       rent: 15,
       coordinates: [77.2030, 28.6159], // Close to center
     },
@@ -41,7 +41,7 @@ const carddata = {
       type: "Property Card",
       name: "Khan Market",
       description: "Upscale shopping destination. High-end retail property.",
-      image: "/images/pheonix.jpg",
+      image: "/images/khan market.webp",
       rent: 20,
       coordinates: [77.2110, 28.6119], // Close to center
     },
@@ -50,7 +50,7 @@ const carddata = {
       type: "Tax",
       name: "Delhi Municipal Tax",
       description: "Pay municipal taxes. Contribute to city development.",
-      image: "/images/rain.jpg",
+      image: "/images/delhi municipal tax.webp",
       rent: 0,
       coordinates: [77.2130, 28.6109], // Close to center
     },
@@ -59,7 +59,7 @@ const carddata = {
       type: "Property Card",
       name: "Lajpat Nagar",
       description: "Popular shopping district. Mid-range commercial property.",
-      image: "/images/taj.jpg",
+      image: "/images/lajpat nagar.webp",
       rent: 25,
       coordinates: [77.2150, 28.6099], // Close to center
     },
@@ -68,7 +68,7 @@ const carddata = {
       type: "Chance",
       name: "Delhi Lottery",
       description: "Take a chance! Draw a chance card for surprises.",
-      image: "/images/punctuation.jpg",
+      image: "/images/delhi lottery.webp",
       rent: 0,
       coordinates: [77.2170, 28.6089], // Close to center
     },
@@ -77,7 +77,7 @@ const carddata = {
       type: "Property Card",
       name: "Karol Bagh",
       description: "Traditional market area. Affordable commercial property.",
-      image: "/images/rameshwaram.jpg",
+      image: "/images/karol baagh.webp",
       rent: 30,
       coordinates: [77.2190, 28.6079], // Close to center
     },
@@ -86,7 +86,7 @@ const carddata = {
       type: "Property Card",
       name: "Rajouri Garden",
       description: "Residential and commercial mix. Growing property value.",
-      image: "/images/hotelMarriot.jpg",
+      image: "/images/rajouri garden.webp" ,
       rent: 35,
       coordinates: [77.2210, 28.6069], // Close to center
     },
@@ -95,7 +95,7 @@ const carddata = {
       type: "Jail",
       name: "Tihar Jail",
       description: "You are in jail! Pay 50 points to get out or wait for doubles.",
-      image: "/images/jail.jpg",
+      image: "/images/tihad jail.webp",
       rent: 50,
       coordinates: [77.2230, 28.6059], // Close to center
     },
